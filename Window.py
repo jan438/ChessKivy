@@ -406,8 +406,6 @@ class ChessBoard(RelativeLayout):
     piece_index = None
     check = BooleanProperty(defaultvalue=False)
 
-#1
-#234
     def on_touch_down(self, touch):
         rows, cols = 8,8
         #get the position
@@ -415,8 +413,6 @@ class ChessBoard(RelativeLayout):
         grid_y = int(touch.pos[1] / self.height * cols)
         if self.checkmate():
             print(f"{ChessBoard.turn_} lost.")
-#2
-#2341234
         for id, child in enumerate(self.children):
             old_x, old_y = child.grid_x, child.grid_y
             if not ChessBoard.piece_pressed:
@@ -431,8 +427,6 @@ class ChessBoard(RelativeLayout):
                     #print(ChessBoard.available_moves)
                     ChessBoard.id_piece_ = child.id
                     break
-#3
-#23412341234
             elif ChessBoard.piece_pressed and grid_x == child.grid_x and grid_y == child.grid_y and ChessBoard.id_piece_[:5] == child.id[:5]:
                 ChessBoard.available_moves = child.available_moves(self.children)
                 #print(child.id)
@@ -441,8 +435,6 @@ class ChessBoard(RelativeLayout):
                 ChessBoard.id_piece_ = child.id
                 ChessBoard.piece_index = id
                 break
-#4
-#23412341234
             elif ChessBoard.piece_pressed and child.id == ChessBoard.id_piece_:
                 if (grid_x, grid_y) in ChessBoard.available_moves["available_moves"]:
                     anim = Animation(grid_x=grid_x, grid_y=grid_y, t='in_quad', duration=0.5)
@@ -452,21 +444,15 @@ class ChessBoard(RelativeLayout):
                     if (child.id[5:9] == "Pawn" or child.id[5:9] == "Rook" or child.id[5:9] == "King") and child.First_use:
                         child.First_use = False
                     self.draw_moves()
-#5
-#2341234123412341234
                     if self.check_check():
                         #print("check si ce move est joué")
                         anim = Animation(grid_x=old_x, grid_y=old_y, t='in_quad', duration=0.5)
                         anim.start(self.children[id])
                         break
-#6
-#2341234123412341234
                     else:
                         print("Turn1")
                         self.turn()
                         break
-#7
-#234123412341234
                 elif (grid_x, grid_y) in ChessBoard.available_moves["pieces_to_capture"]:
                     for enemy in self.children:
                         if enemy.grid_x == grid_x and enemy.grid_y == grid_y:
@@ -475,13 +461,9 @@ class ChessBoard(RelativeLayout):
                             self.remove_widget(enemy)
                             ChessBoard.piece_pressed = False
                             ChessBoard.available_moves = {"available_moves":(), "pieces_to_capture":[]}
-#9
-#234123412341234123412341234
                             if (child.id[5:9] == "Pawn" or child.id[5:9] == "Rook" or child.id[5:9] == "King") and child.First_use:
                                 child.First_use = False
                             self.draw_moves()
-#10
-#234123412341234123412341234
                             if self.check_check():
                                 #("print check si ce move est joué")
                                 anim = Animation(grid_x=old_x, grid_y=old_y, t='in_quad', duration=0.5)
@@ -490,11 +472,7 @@ class ChessBoard(RelativeLayout):
                             else:
                                 print("Turn2")
                                 self.turn()
-#11
-#2341234123412341234123412341234
                                 break
-#12
-#23412341234
             elif ChessBoard.piece_pressed and ChessBoard.id_piece_[5:] == "King" and (grid_x, grid_y) in ChessBoard.available_moves["castling"] and child.id[:5] == ChessBoard.id_piece_[:5] and child.id[5:-2] == "Rook" and child.First_use:
                 #TODO: check check
                 if child.grid_x == grid_x + 1:
@@ -509,8 +487,6 @@ class ChessBoard(RelativeLayout):
                 child.First_use = False
                 self.children[ChessBoard.piece_index].First_use = False
                 ChessBoard.available_moves = {"available_moves":(), "pieces_to_capture":[]}
-#13
-#234123412341234
                 if self.check_check():
                     #("print check si ce move est joué")
                     anim = Animation(grid_x=old_x, grid_y=old_y, t='in_quad', duration=0.5)
@@ -524,8 +500,6 @@ class ChessBoard(RelativeLayout):
                     child.First_use = True
                     self.children[ChessBoard.piece_index].First_use = True
                     break
-#14
-#234123412341234
                 else:
                     print("Turn3")
                     self.turn()
@@ -533,8 +507,6 @@ class ChessBoard(RelativeLayout):
                     break
                 print("Turn4")
                 self.turn()
-#15
-#234123412341234
                 self.draw_moves()
 
 
