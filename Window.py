@@ -37,18 +37,7 @@ class Pawn(ChessPiece):
         print("Value of First_use changed", value)
 
     def available_moves(self, pieces):
-        """
-            parameters : pieces -> a container with every available pieces in the game.
-            Check if it's a white or black pawn.
-            Then find if there are available moves.
-            Look for pieces to capture (on the left or on the right)
-            available moves are stored in a dictionary (available_moves).
-            available_moves has 2 keys. The first one contains a tuple with every possible moves.
-            A move is a tuple that contains x and y coordinates.
-            The second key contains the position of the pieces that can be captured.
 
-            return : available_moves (dictionary)
-        """
         if self.id[:5] == "White":
             available_moves = {"available_moves":(), "pieces_to_capture":[]}
 
@@ -61,9 +50,6 @@ class Pawn(ChessPiece):
             else:
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y+1),)
                 #print("not first use, available_moves : ",available_moves["available_moves"])
-
-
-
 
             for piece in pieces:
                 #if there is a piece in front of it then it can move forward.
@@ -111,9 +97,7 @@ class Pawn(ChessPiece):
             return available_moves
 
 class Rook(ChessPiece):
-    """
-        Class for Rook piece.
-    """
+
     First_use = BooleanProperty()
     def available_moves(self, pieces):
         #super(Rook, self).available_moves(pieces)
@@ -178,13 +162,9 @@ class Rook(ChessPiece):
 
 
 class Knight(ChessPiece):
-    """
-        Class for Knight piece.
-    """
 
     def available_moves(self, pieces):
         available_moves = {"available_moves":self.create_moves(), "pieces_to_capture":[]}
-
 
         for piece in pieces:
             if self.id[:5] == "White":
@@ -230,9 +210,6 @@ class Knight(ChessPiece):
         return good_moves
 
 class Bishop(ChessPiece):
-    """
-        Class for Bishop piece.
-    """
 
     def available_moves(self, pieces):
         #super(Bishop, self).available_moves(pieces)
@@ -563,9 +540,6 @@ class ChessBoard(RelativeLayout):
 
 
     def checkmate(self):
-        """
-        Check if a player can avoid checkmate.
-        """
 
         if self.check_check():
             still_check = True
@@ -612,11 +586,6 @@ class ChessBoard(RelativeLayout):
 
     def draw_moves(self):
 
-        """
-        Draw available moves.
-        Moves are circles. They are added in a group.
-        We can delete this group and so delete the ellipses.
-        """
         grid_size_x = self.width / 8
         grid_size_y = self.height / 8
         Blue = (0, 0, 1)
@@ -640,10 +609,6 @@ class ChessBoard(RelativeLayout):
                     Color(rgb=Green)
                     for move in moves:
                         Ellipse(pos=(grid_size_x * move[0]+grid_size_x/2 - size[0]/2, grid_size_y * move[1] + grid_size_y/2 - size[1]/2), size=size, group="moves")
-
-
-
-        #print("moves : ",self.canvas.get_group('moves'))
 
     def on_size(self, *_):
         #update the board
@@ -677,8 +642,6 @@ class ChessBoard(RelativeLayout):
                     is_white = not is_white
                 is_white = not is_white
 
-
-
 class ChessBoardScreen(Screen):
     def __init__(self, **kwargs):
         super(ChessBoardScreen, self).__init__(**kwargs)
@@ -687,14 +650,9 @@ class ChessBoardScreen(Screen):
         self.game = ChessGame()
         self.add_widget(self.game)
 
-
-
 class ChessApp(App):
     def build(self):
-        #sm = ScreenManager()
-        #sm.add_widget(ChessBoardScreen(name='board'))
         board = ChessBoard()
-        #Add every piece.
         for col in range(8):
             board.add_widget(Pawn(id="WhitePawn_"+str(col),source="Assets/PNG/WhitePawn.png",grid_x=col, grid_y=1))
             board.add_widget(Pawn(id="BlackPawn_"+str(col),source="Assets/PNG/BlackPawn.png",grid_x=col, grid_y=6))
