@@ -433,10 +433,11 @@ class ChessBoard(RelativeLayout):
                     self.index += 1
                     print("Move", self.move)
             elif l == '.':
+                print("Final Move", self.move)
                 self.move = "    "
                 self.index = 0
                 self.inputmode = False
-                print("Move", self.move)
+
         return True
         
     def close_application(self): 
