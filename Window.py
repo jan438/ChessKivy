@@ -538,11 +538,6 @@ class ChessBoard(RelativeLayout):
                 self.turn()
                 self.draw_moves()
 
-
-
-            #print(ChessBoard.id_piece_[5:], child.id[:5], ChessBoard.id_piece_[:5], child.id[5:-2])
-
-
     def turn(self):
         if ChessBoard.turn_ == "White":
             ChessBoard.turn_ = "Black"
