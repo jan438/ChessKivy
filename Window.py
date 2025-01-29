@@ -7,6 +7,7 @@ from kivy.uix.widget import Widget
 from kivy.config import Config
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.gridlayout import GridLayout 
 from kivy.uix.image import Image
 from kivy.animation import Animation
 from kivy.properties import *
@@ -14,6 +15,7 @@ from kivy.graphics.instructions import InstructionGroup
 from kivy.graphics import Rectangle, Color, Ellipse
 from kivy.lang.builder import Builder
 from kivy.uix.popup import Popup
+from kivy.uix.label import Label 
 
 Width, Height = 800, 800
 Window.size = (Width, Height)
@@ -380,6 +382,13 @@ class ChessBoard(RelativeLayout):
             self.move = "    "
             self.index = 0
             self.inputmode = True
+            layout = GridLayout(cols = 1, padding = 10) 
+            popupLabel = Label(text = "Click for pop-up") 
+            closeButton = Button(text = "Close the pop-up") 
+            layout.add_widget(popupLabel) 
+            layout.add_widget(closeButton)   
+            popup = Popup(title ='Demo Popup', content = layout, size_hint =(None, None), size =(200, 200))   
+            popup.open()    
         if self.inputmode:
             if (l >= 'a' and l <= 'h') or (l >= '1' and l <= '8'):
                 if self.index < 4:
