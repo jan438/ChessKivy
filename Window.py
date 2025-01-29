@@ -388,7 +388,8 @@ class ChessBoard(RelativeLayout):
             layout.add_widget(popupLabel) 
             layout.add_widget(closeButton)   
             popup = Popup(title ='Demo Popup', content = layout, size_hint =(None, None), size =(200, 200))   
-            popup.open()    
+            popup.open()
+            closeButton.bind(on_press = popup.dismiss)      
         if self.inputmode:
             if (l >= 'a' and l <= 'h') or (l >= '1' and l <= '8'):
                 if self.index < 4:
