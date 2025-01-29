@@ -383,7 +383,7 @@ class ChessBoard(RelativeLayout):
             self.index = 0
             self.inputmode = True
             layout = GridLayout(cols = 1, padding = 10) 
-            popupLabel = Label(text = "Click for pop-up") 
+            popupLabel = Label(text = "Move") 
             closeButton = Button(text = "Close the pop-up") 
             layout.add_widget(popupLabel) 
             layout.add_widget(closeButton)   
