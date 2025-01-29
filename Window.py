@@ -421,18 +421,13 @@ class ChessBoard(RelativeLayout):
                 if grid_x == child.grid_x and grid_y == child.grid_y and child.id[:5] == ChessBoard.turn_: #The player clicked on a piece
                     ChessBoard.piece_pressed = True
                     ChessBoard.piece_index = id
-                    #Get available_moves
-                    #print(child.id)
                     ChessBoard.available_moves = child.available_moves(self.children)
                     self.draw_moves()
-                    #print(ChessBoard.available_moves)
                     ChessBoard.id_piece_ = child.id
                     break
             elif ChessBoard.piece_pressed and grid_x == child.grid_x and grid_y == child.grid_y and ChessBoard.id_piece_[:5] == child.id[:5]:
                 ChessBoard.available_moves = child.available_moves(self.children)
-                #print(child.id)
                 self.draw_moves()
-                #print("in elif",ChessBoard.available_moves)
                 ChessBoard.id_piece_ = child.id
                 ChessBoard.piece_index = id
                 break
