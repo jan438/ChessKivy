@@ -335,7 +335,7 @@ class ChessBoard(RelativeLayout):
     turn_ = "White"
     piece_index = None
     check = BooleanProperty(defaultvalue=False)
-    move = "h2h4"
+    move = ""
     index = -1
     inputmode = False
     
@@ -352,30 +352,18 @@ class ChessBoard(RelativeLayout):
         l = keycode[1]
         if l == 'q':
             self.close_application()
-        elif l == 'm':
-            self.move = "    "
-            self.index = 0
-            self.inputmode = True
+        if (l >= 'a' and l <= 'h') or (l >= '1' and l <= '8'):
             layout = GridLayout(cols = 1, padding = 10) 
-            popupLabel = Label(text = "Move") 
+            popupLabel = Label(text = "Move:" + self.move) 
             closeButton = Button(text = "Close the pop-up") 
             layout.add_widget(popupLabel) 
             layout.add_widget(closeButton)   
             popup = Popup(title ='Demo Popup', content = layout, size_hint =(None, None), size =(200, 200))   
             popup.open()
-            closeButton.bind(on_press = popup.dismiss)      
-        if self.inputmode:
-            if (l >= 'a' and l <= 'h') or (l >= '1' and l <= '8'):
-                if self.index < 4:
-                    self.move = self.move[:self.index] + l + self.move[self.index + 1:]
-                    self.index += 1
-                    print("Move", self.move)
-            elif l == '.':
-                print("Final Move", self.move)
-                self.move = "    "
-                self.index = 0
-                self.inputmode = False
-
+            closeButton.bind(on_press = popup.dismiss)
+            if self.index < 4:
+                self.move = self.move[:self.index] + l + self.move[self.index + 1:]
+                self.index += 1
         return True
         
     def close_application(self): 
@@ -475,7 +463,6 @@ class ChessBoard(RelativeLayout):
     def turn(self):
         if ChessBoard.turn_ == "White":
             ChessBoard.turn_ = "Black"
-
         else:
             ChessBoard.turn_ = "White"
 
@@ -485,8 +472,6 @@ class ChessBoard(RelativeLayout):
             if piece_.id[:5] == ChessBoard.turn_ and piece_.id[5:] == "King":
                 King = piece_
                 break
-
-
         for piece in self.children:
             if piece.id[:5] != ChessBoard.turn_:
                 piece_available_moves = piece.available_moves(self.children)
