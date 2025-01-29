@@ -21,7 +21,6 @@ Window.size = (Width, Height)
 #Config.set('graphics', 'resizable', False)
 class ChessPiece(ButtonBehavior, Image):
 
-
     grid_x = NumericProperty()
     grid_y = NumericProperty()
     id = StringProperty()
@@ -29,9 +28,7 @@ class ChessPiece(ButtonBehavior, Image):
         pass
 
 class Pawn(ChessPiece):
-    """
-        Class for Pawn Piece.
-    """
+
     First_use = BooleanProperty()
     def callback(instance, value):
         print("Value of First_use changed", value)
