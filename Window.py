@@ -202,11 +202,9 @@ class Knight(ChessPiece):
 class Bishop(ChessPiece):
 
     def available_moves(self, pieces):
-        #super(Bishop, self).available_moves(pieces)
         available_moves = {"available_moves":[], "pieces_to_capture":[]}
         rows = 8
         cols = 8
-
         for i in range(1, rows):
             if self.grid_x + i >= rows or self.grid_y + i >= cols:
                 break
@@ -217,11 +215,9 @@ class Bishop(ChessPiece):
                     if piece.id[:5] != self.id[:5]:
                         available_moves["pieces_to_capture"].append((self.grid_x + i, self.grid_y + i))
                     break
-
             if found:
                 break
             available_moves["available_moves"].append((self.grid_x + i, self.grid_y + i))
-
         for i in range(1, rows):
             #print("coord ",self.grid_x - i, self.grid_y + i)
             if self.grid_x - i < 0 or self.grid_y + i >= rows:
@@ -234,11 +230,9 @@ class Bishop(ChessPiece):
                     if piece.id[:5] != self.id[:5]:
                         available_moves["pieces_to_capture"].append((self.grid_x - i, self.grid_y + i))
                     break
-
             if found:
                 break
             available_moves["available_moves"].append((self.grid_x - i, self.grid_y + i))
-
         for i in range(1, rows):
             if self.grid_x - i < 0 or self.grid_y - i < 0:
                 break
@@ -249,11 +243,9 @@ class Bishop(ChessPiece):
                     if piece.id[:5] != self.id[:5]:
                         available_moves["pieces_to_capture"].append((self.grid_x - i, self.grid_y - i))
                     break
-
             if found:
                 break
             available_moves["available_moves"].append((self.grid_x - i, self.grid_y - i))
-
         for i in range(1, rows):
             if self.grid_x + i >= rows or self.grid_y - i < 0:
                 break
@@ -264,24 +256,15 @@ class Bishop(ChessPiece):
                     if piece.id[:5] != self.id[:5]:
                         available_moves["pieces_to_capture"].append((self.grid_x + i, self.grid_y - i))
                     break
-
             if found:
                 break
             available_moves["available_moves"].append((self.grid_x + i, self.grid_y - i))
-
-
         return available_moves
-
 
 class Queen(Rook, Bishop): #Inherit from Bishop and Rook
     def available_moves(self, pieces):
-        #Inherits from Bishop and Rook
-        #get the available moves
-        #super(Rook, self).available_moves(pieces)
         available_moves1 = Rook.available_moves(self,pieces)
-        #print("available_moves1", available_moves1)
         available_moves2 = Bishop.available_moves(self,pieces)
-        #print("available_moves2", available_moves2)
         available_moves = {key: val + available_moves2[key] for key, val in available_moves1.items()}
         return available_moves
 
@@ -292,15 +275,9 @@ class King(ChessPiece):
         rows, cols = 8,8
         good_available_moves = []
         for move in available_moves["available_moves"]:
-
             if move[0] <= cols and move[1] <= rows and move[1] >= 0 and move[0] >= 0:
-
                 good_available_moves.append(move)
-                #print("in King : ", available_moves)
-
         available_moves["available_moves"] = good_available_moves
-        #print("in King : ", available_moves)
-
         for piece in pieces:
             if (piece.grid_x, piece.grid_y) in available_moves["available_moves"]:
                 if piece.id[:5] != self.id[:5]:
@@ -308,12 +285,9 @@ class King(ChessPiece):
                     available_moves["pieces_to_capture"].append((piece.grid_x, piece.grid_y))
 
                 available_moves["available_moves"].remove((piece.grid_x, piece.grid_y))
-
         if self.First_use:
             available_moves["castling"] = self.castling(pieces)
-
         return available_moves
-
 
     def create_moves(self):
         available_moves = {"available_moves":[], "pieces_to_capture":[]}
@@ -413,8 +387,6 @@ class ChessBoard(RelativeLayout):
         #get the position
         grid_x = int(touch.pos[0] / self.width * rows)
         grid_y = int(touch.pos[1] / self.height * cols)
-        if self.checkmate():
-            print(f"{ChessBoard.turn_} lost.")
         for id, child in enumerate(self.children):
             old_x, old_y = child.grid_x, child.grid_y
             if not ChessBoard.piece_pressed:
