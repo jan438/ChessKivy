@@ -13,7 +13,7 @@ from kivy.properties import *
 from kivy.graphics.instructions import InstructionGroup
 from kivy.graphics import Rectangle, Color, Ellipse
 from kivy.lang.builder import Builder
-
+from kivy.uix.popup import Popup
 
 Width, Height = 800, 800
 Window.size = (Width, Height)
