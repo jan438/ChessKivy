@@ -520,14 +520,9 @@ class ChessBoard(RelativeLayout):
         #self.canvas.clear()
 
         with self.canvas:
-            #self.canvas.remove_group()
-            #print("draw")
-            self.canvas.remove_group("moves") #remove previous moves drawn
-            size = (0.2*grid_size_x, 0.2*grid_size_y) #size of a circle that represents an available move
-            #moves = InstructionGroup() #Group where we store every circles
-
-            for idx, moves in enumerate(ChessBoard.available_moves.values()): #available_moves and pieces_to_capture
-                #print("moves in draw_moves : ", moves)
+            self.canvas.remove_group("moves")
+            size = (0.2*grid_size_x, 0.2*grid_size_y)
+            for idx, moves in enumerate(ChessBoard.available_moves.values()):
                 if idx == 0:
                     Color(rgb=Blue)
                     for move in moves:
