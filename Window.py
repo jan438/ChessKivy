@@ -21,7 +21,6 @@ from kivy.uix.label import Label
 Width, Height = 800, 800
 Window.size = (Width, Height)
 
-#Config.set('graphics', 'resizable', False)
 class ChessPiece(ButtonBehavior, Image):
 
     grid_x = NumericProperty()
@@ -40,33 +39,21 @@ class Pawn(ChessPiece):
 
         if self.id[:5] == "White":
             available_moves = {"available_moves":(), "pieces_to_capture":[]}
-
             if self.grid_y > 7:
                 return available_moves
             if self.First_use:  #if it's the first time a pawn moves
-                #origins of the x and y axis are in the bottom left corner.
-                #so a white pawn moves forward by incrementing its y coordinate.
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y+1), (self.grid_x, self.grid_y+2))
             else:
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y+1),)
-                #print("not first use, available_moves : ",available_moves["available_moves"])
-
             for piece in pieces:
-                #if there is a piece in front of it then it can move forward.
-
                 if piece.grid_y == self.grid_y + 1 and piece.grid_x == self.grid_x:
                     available_moves["available_moves"] = ()
-
                 if self.First_use and piece.grid_y == self.grid_y + 2 and piece.grid_x == self.grid_x:
                     available_moves["available_moves"] = ()
-
-                #Look for pieces to capture. They must be white pieces.
                 if piece.id[:5] == "Black" and piece.grid_x == self.grid_x + 1 and piece.grid_y == self.grid_y + 1:
                     available_moves["pieces_to_capture"].append((self.grid_x + 1,self.grid_y + 1))
-
                 if piece.id[:5] == "Black" and piece.grid_x == self.grid_x - 1 and piece.grid_y == self.grid_y + 1:
                     available_moves["pieces_to_capture"].append((self.grid_x - 1,self.grid_y + 1))
-
             return available_moves
 
         if self.id[:5] == "Black":
