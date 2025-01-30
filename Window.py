@@ -57,30 +57,20 @@ class Pawn(ChessPiece):
             return available_moves
 
         if self.id[:5] == "Black":
-
-            #print("Black")
             available_moves = {"available_moves":(), "pieces_to_capture":[]}
-            if self.First_use: #if it's the first time a pawn moves
-                #self.First_use = False
-                #print("First Use")
-                #a white pawn moves forward by decrementing its y coordinate.
+            if self.First_use:
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y-1), (self.grid_x,self.grid_y-2))
             else:
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y-1),)
             for piece in pieces:
                 if piece.grid_y == self.grid_y - 1 and piece.grid_x == self.grid_x:
                     available_moves["available_moves"] = ()
-
                 if self.First_use and piece.grid_y == self.grid_y - 2 and piece.grid_x == self.grid_x:
                     available_moves["available_moves"] = ()
-
-                #Look for pieces to capture. They must be white pieces.
                 if piece.id[:5] == "White" and piece.grid_x == self.grid_x + 1 and piece.grid_y == self.grid_y - 1:
                     available_moves["pieces_to_capture"].append((self.grid_x + 1,self.grid_y - 1))
-
                 if piece.id[:5] == "White" and piece.grid_x == self.grid_x - 1 and piece.grid_y == self.grid_y - 1:
                     available_moves["pieces_to_capture"].append((self.grid_x - 1,self.grid_y - 1))
-
             return available_moves
 
 class Rook(ChessPiece):
