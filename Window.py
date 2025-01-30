@@ -524,7 +524,6 @@ class ChessBoard(RelativeLayout):
                         Ellipse(pos=(grid_size_x * move[0]+grid_size_x/2 - size[0]/2, grid_size_y * move[1] + grid_size_y/2 - size[1]/2), size=size, group="moves")
 
     def on_size(self, *_):
-        #update the board
         self.draw_board()
         self.draw_moves()
 
