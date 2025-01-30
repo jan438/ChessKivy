@@ -354,7 +354,7 @@ class ChessBoard(RelativeLayout):
                     self.index += 1
             elif l == '.':
                 print(self.move)
-                popup = YesNoPopup(title='Test popup')
+                popup = YesNoPopup(title = self.move)
                 popup.open()
                 self.inputmode = False
         return True
