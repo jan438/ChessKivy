@@ -352,18 +352,18 @@ class ChessBoard(RelativeLayout):
         l = keycode[1]
         if l == 'q':
             self.close_application()
-        if (l >= 'a' and l <= 'h') or (l >= '1' and l <= '8'):
-            layout = GridLayout(cols = 1, padding = 10) 
-            popupLabel = Label(text = "Move:" + self.move) 
-            closeButton = Button(text = "Close the pop-up") 
-            layout.add_widget(popupLabel) 
-            layout.add_widget(closeButton)   
-            popup = Popup(title ='Demo Popup', content = layout, size_hint =(None, None), size =(200, 200))   
-            popup.open()
-            closeButton.bind(on_press = popup.dismiss)
-            if self.index < 4:
-                self.move = self.move[:self.index] + l + self.move[self.index + 1:]
-                self.index += 1
+        elif l == 'm':
+            self.move = "    "
+            self.index = 0
+            self.inputmode = True
+        if self.inputmode:
+            if (l >= 'a' and l <= 'h') or (l >= '1' and l <= '8'):
+                if self.index < 4:
+                    self.move = self.move[:self.index] + l + self.move[self.index + 1:]
+                    self.index += 1
+            elif l == '.':
+                print(self.move)
+                self.inputmode = False
         return True
         
     def close_application(self): 
