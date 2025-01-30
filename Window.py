@@ -276,7 +276,6 @@ class King(ChessPiece):
             for piece in pieces:
                 #Problem with if : if there's an ennemy piece it may work
                 if piece.grid_y == self.grid_y and piece.grid_x > self.grid_x and (piece.id[5:9] != "Rook" or self.id[:5] != piece.id[:5]):
-                    #print("no_piece_right False : ", piece.grid_y, piece.grid_x, piece.id)
                     no_piece_right = False
 
                 elif piece.grid_y == self.grid_y and piece.grid_x < self.grid_x and (piece.id[5:9] != "Rook" or self.id[:5] != piece.id[:5]):
@@ -298,7 +297,7 @@ class YesNoPopup(Popup):
         super(YesNoPopup, self).__init__(**kwargs)
         self.size_hint = (0.5, 0.5)
         layout = BoxLayout(orientation='vertical')
-        message = Label(text = 'Do you want to proceed?')
+        message = Label(text = "Proceed? " + ChessBoard.turn_)
         layout.add_widget(message)
         button_layout = BoxLayout(size_hint_y=0.3)
         yes_button = Button(text = 'Yes')
