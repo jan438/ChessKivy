@@ -7,7 +7,8 @@ from kivy.uix.widget import Widget
 from kivy.config import Config
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.relativelayout import RelativeLayout
-from kivy.uix.gridlayout import GridLayout 
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout 
 from kivy.uix.image import Image
 from kivy.animation import Animation
 from kivy.properties import *
@@ -326,6 +327,38 @@ class King(ChessPiece):
                 return [(self.grid_x-2, self.grid_y)]
         return []
 
+class YesNoPopup(Popup):
+    def __init__(self, **kwargs):
+        super(YesNoPopup, self).__init__(**kwargs)
+        self.title = 'Confirmation'
+        self.size_hint = (0.5, 0.5)
+        
+        layout = BoxLayout(orientation='vertical')
+        
+        message = Label(text='Do you want to proceed?')
+        layout.add_widget(message)
+        
+        button_layout = BoxLayout(size_hint_y=0.3)
+        
+        yes_button = Button(text='Yes')
+        yes_button.bind(on_release=self.on_yes)
+        button_layout.add_widget(yes_button)
+        
+        no_button = Button(text='No')
+        no_button.bind(on_release=self.on_no)
+        button_layout.add_widget(no_button)
+        
+        layout.add_widget(button_layout)
+        
+        self.add_widget(layout)
+    
+    def on_yes(self, instance):
+        print("User chose Yes")
+        self.dismiss()
+    
+    def on_no(self, instance):
+        print("User chose No")
+        self.dismiss()
 
 class ChessBoard(RelativeLayout):
 
@@ -363,6 +396,8 @@ class ChessBoard(RelativeLayout):
                     self.index += 1
             elif l == '.':
                 print(self.move)
+                popup = YesNoPopup()
+                popup.open()
                 self.inputmode = False
         return True
         
