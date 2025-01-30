@@ -77,12 +77,9 @@ class Rook(ChessPiece):
 
     First_use = BooleanProperty()
     def available_moves(self, pieces):
-        #super(Rook, self).available_moves(pieces)
         available_moves = {"available_moves":[], "pieces_to_capture":[]}
         rows = 8
         cols = 8
-        #print("range values rook 0", self.grid_y + 1, rows -  self.grid_y)
-
         for x in range(int(self.grid_x) + 1, cols):
             found = False
             for piece in pieces:
@@ -94,14 +91,9 @@ class Rook(ChessPiece):
             if found:
                 break
             available_moves["available_moves"].append((x, self.grid_y))
-
-
-
         for y in range(int(self.grid_y) + 1, rows):
             found = False
             for piece in pieces:
-                #print("coord", piece.grid_x, piece.grid_y, self.grid_x, y)
-                #print(piece.grid_x == int(self.grid_x))
                 if piece.grid_x == self.grid_x and piece.grid_y == y:
                     found = True
                     if piece.id[:5] != self.id[:5]:
@@ -110,7 +102,6 @@ class Rook(ChessPiece):
             if found:
                 break
             available_moves["available_moves"].append((self.grid_x, y))
-
         for x in range(int(self.grid_x) - 1, -1, -1):
             found = False
             for piece in pieces:
@@ -122,7 +113,6 @@ class Rook(ChessPiece):
             if found:
                 break
             available_moves["available_moves"].append((x, self.grid_y))
-
         for y in range(int(self.grid_y) - 1, -1, -1):
             found = False
             for piece in pieces:
@@ -134,7 +124,6 @@ class Rook(ChessPiece):
             if found:
                 break
             available_moves["available_moves"].append((self.grid_x, y))
-
         return available_moves
 
 
