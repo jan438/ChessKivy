@@ -298,20 +298,22 @@ class YesNoPopup(Popup):
         super(YesNoPopup, self).__init__(**kwargs)
         self.size_hint = (0.5, 0.5)
         layout = BoxLayout(orientation='vertical')
-        message = Label(text='Do you want to proceed?')
+        message = Label(text = 'Do you want to proceed?')
         layout.add_widget(message)
         button_layout = BoxLayout(size_hint_y=0.3)
-        yes_button = Button(text='Yes')
+        yes_button = Button(text = 'Yes')
         yes_button.bind(on_release=self.on_yes)
         button_layout.add_widget(yes_button)
-        no_button = Button(text='No')
+        no_button = Button(text = 'No')
         no_button.bind(on_release=self.on_no)
         button_layout.add_widget(no_button)
         layout.add_widget(button_layout)
         self.add_widget(layout)
     
     def on_yes(self, instance):
-        print("User chose Yes")
+        print(ChessBoard.turn_)
+        ChessBoard.turn(ChessBoard)
+        print(ChessBoard.turn_)
         self.dismiss()
     
     def on_no(self, instance):
@@ -353,7 +355,6 @@ class ChessBoard(RelativeLayout):
                     self.move = self.move[:self.index] + l + self.move[self.index + 1:]
                     self.index += 1
             elif l == '.':
-                print(self.move)
                 popup = YesNoPopup(title = self.move)
                 popup.open()
                 self.inputmode = False
@@ -371,7 +372,7 @@ class ChessBoard(RelativeLayout):
         for id, child in enumerate(self.children):
             old_x, old_y = child.grid_x, child.grid_y
             if not ChessBoard.piece_pressed:
-                if grid_x == child.grid_x and grid_y == child.grid_y and child.id[:5] == ChessBoard.turn_: #The player clicked on a piece
+                if grid_x == child.grid_x and grid_y == child.grid_y and child.id[:5] == ChessBoard.turn_:
                     ChessBoard.piece_pressed = True
                     ChessBoard.piece_index = id
                     ChessBoard.available_moves = child.available_moves(self.children)
@@ -434,7 +435,6 @@ class ChessBoard(RelativeLayout):
                 self.children[ChessBoard.piece_index].First_use = False
                 ChessBoard.available_moves = {"available_moves":(), "pieces_to_capture":[]}
                 if self.check_check():
-                    #("print check si ce move est joué")
                     anim = Animation(grid_x=old_x, grid_y=old_y, t='in_quad', duration=0.5)
                     anim.start(self.children[id])
                     if ChessBoard.id_piece_ == "White":
