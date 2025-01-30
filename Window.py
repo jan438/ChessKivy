@@ -310,9 +310,7 @@ class YesNoPopup(Popup):
         self.add_widget(layout)
     
     def on_yes(self, instance):
-        print(ChessBoard.turn_)
-        ChessBoard.turn(ChessBoard)
-        print(ChessBoard.turn_)
+        print("User chose Yes")
         self.dismiss()
     
     def on_no(self, instance):
