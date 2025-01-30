@@ -510,8 +510,6 @@ class ChessBoard(RelativeLayout):
         grid_size_y = self.height / 8
         Blue = (0, 0, 1)
         Green = (0, 1, 0)
-        #self.canvas.clear()
-
         with self.canvas:
             self.canvas.remove_group("moves")
             size = (0.2*grid_size_x, 0.2*grid_size_y)
