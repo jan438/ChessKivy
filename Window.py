@@ -296,26 +296,18 @@ class King(ChessPiece):
 class YesNoPopup(Popup):
     def __init__(self, **kwargs):
         super(YesNoPopup, self).__init__(**kwargs)
-        self.title = 'Confirmation'
         self.size_hint = (0.5, 0.5)
-        
         layout = BoxLayout(orientation='vertical')
-        
         message = Label(text='Do you want to proceed?')
         layout.add_widget(message)
-        
         button_layout = BoxLayout(size_hint_y=0.3)
-        
         yes_button = Button(text='Yes')
         yes_button.bind(on_release=self.on_yes)
         button_layout.add_widget(yes_button)
-        
         no_button = Button(text='No')
         no_button.bind(on_release=self.on_no)
         button_layout.add_widget(no_button)
-        
         layout.add_widget(button_layout)
-        
         self.add_widget(layout)
     
     def on_yes(self, instance):
@@ -362,7 +354,7 @@ class ChessBoard(RelativeLayout):
                     self.index += 1
             elif l == '.':
                 print(self.move)
-                popup = YesNoPopup()
+                popup = YesNoPopup(title='Test popup')
                 popup.open()
                 self.inputmode = False
         return True
