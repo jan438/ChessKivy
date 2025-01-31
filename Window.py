@@ -329,7 +329,7 @@ class ChessBoard(RelativeLayout):
                     self.index += 1
             elif l == '.':
                 layout = BoxLayout(orientation='vertical')
-                message = Label(text = "Proceed? " + ChessBoard.turn_)
+                message = Label(text = "Proceed? " + ChessBoard.turn_ + " " + self.move)
                 layout.add_widget(message)
                 button_layout = BoxLayout(size_hint_y=0.3)
                 yes_button = Button(text = 'Yes')
@@ -339,7 +339,7 @@ class ChessBoard(RelativeLayout):
                 no_button.bind(on_release=self.on_no)
                 button_layout.add_widget(no_button)
                 layout.add_widget(button_layout)
-                self.pp = Popup(title = self.move, content = layout, size_hint = (0.5, 0.5))
+                self.pp = Popup(title = "Title", content = layout, size_hint = (0.5, 0.5))
                 self.pp.open()
                 self.inputmode = False
         return True
