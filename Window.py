@@ -303,6 +303,7 @@ class ChessBoard(RelativeLayout):
     move = ""
     index = -1
     inputmode = False
+    pp = Popup()
     
     def __init__(self, **kwargs):
         super(ChessBoard, self).__init__(**kwargs)
@@ -338,18 +339,18 @@ class ChessBoard(RelativeLayout):
                 no_button.bind(on_release=self.on_no)
                 button_layout.add_widget(no_button)
                 layout.add_widget(button_layout)
-                popup = Popup(title = self.move, content = layout, size_hint = (0.5, 0.5))
-                popup.open()
+                self.pp = Popup(title = self.move, content = layout, size_hint = (0.5, 0.5))
+                self.pp.open()
                 self.inputmode = False
         return True
         
     def on_yes(self, instance):
         print("User chose Yes")
-        #self.dismiss()
+        self.pp.dismiss()
     
     def on_no(self, instance):
         print("User chose No")
-        #self.dismiss()
+        self.pp.dismiss()
         
     def close_application(self): 
         App.get_running_app().stop() 
