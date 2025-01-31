@@ -345,7 +345,7 @@ class ChessBoard(RelativeLayout):
         return True
         
     def on_yes(self, instance):
-        print("User chose Yes")
+        print("User chose Yes", self.move)
         self.pp.dismiss()
     
     def on_no(self, instance):
