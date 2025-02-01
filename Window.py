@@ -328,8 +328,12 @@ class ChessBoard(RelativeLayout):
                     self.move = self.move[:self.index] + l + self.move[self.index + 1:]
                     self.index += 1
             elif l == '.':
+                if ChessBoard.turn_ == "White":
+                    labelcolor = [1, 1, 1, 1] 
+                else:
+                    labelcolor = [0, 0, 0, 1] 
                 layout = BoxLayout(orientation='vertical')
-                message = Label(text = "Proceed? " + ChessBoard.turn_ + " " + self.move, color = [0, 0, 0, 1], font_size='40sp')
+                message = Label(text = "Proceed? " + ChessBoard.turn_ + " " + self.move, color = labelcolor, font_size='40sp')
                 layout.add_widget(message)
                 button_layout = BoxLayout(size_hint_y=0.3)
                 yes_button = Button(text = 'Yes')
