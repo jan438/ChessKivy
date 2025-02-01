@@ -41,7 +41,7 @@ class Pawn(ChessPiece):
             available_moves = {"available_moves":(), "pieces_to_capture":[]}
             if self.grid_y > 7:
                 return available_moves
-            if self.First_use:  #if it's the first time a pawn moves
+            if self.First_use:
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y+1), (self.grid_x, self.grid_y+2))
             else:
                 available_moves["available_moves"] = ((self.grid_x, self.grid_y+1),)
@@ -191,7 +191,6 @@ class Bishop(ChessPiece):
                 break
             found = False
             for piece in pieces:
-                #print(piece.grid_x, piece.grid_y,piece.grid_x == self.grid_x - i and piece.grid_y == self.grid_y + i)
                 if piece.grid_x == self.grid_x - i and piece.grid_y == self.grid_y + i:
                     found = True
                     if piece.id[:5] != self.id[:5]:
@@ -228,7 +227,7 @@ class Bishop(ChessPiece):
             available_moves["available_moves"].append((self.grid_x + i, self.grid_y - i))
         return available_moves
 
-class Queen(Rook, Bishop): #Inherit from Bishop and Rook
+class Queen(Rook, Bishop):
     def available_moves(self, pieces):
         available_moves1 = Rook.available_moves(self,pieces)
         available_moves2 = Bishop.available_moves(self,pieces)
@@ -362,7 +361,6 @@ class ChessBoard(RelativeLayout):
 
     def on_touch_down(self, touch):
         rows, cols = 8,8
-        #get the position
         grid_x = int(touch.pos[0] / self.width * rows)
         grid_y = int(touch.pos[1] / self.height * cols)
         for id, child in enumerate(self.children):
