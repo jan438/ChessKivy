@@ -352,7 +352,6 @@ class ChessBoard(RelativeLayout):
         self.pp.dismiss()
     
     def on_no(self, instance):
-        print("User chose No")
         self.pp.dismiss()
         
     def close_application(self): 
