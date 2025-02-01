@@ -343,7 +343,7 @@ class ChessBoard(RelativeLayout):
                 no_button.bind(on_release=self.on_no)
                 button_layout.add_widget(no_button)
                 layout.add_widget(button_layout)
-                self.pp = Popup(title = "Title", content = layout, size_hint = (0.5, 0.5), background_color = [4,.4,.2, 1])
+                self.pp = Popup(title = "AIPGN", content = layout, size_hint = (0.5, 0.5), background_color = [4,.4,.2, 1])
                 self.pp.open()
                 self.inputmode = False
         return True
